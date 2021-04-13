@@ -1,9 +1,9 @@
 {
-  "name": "javascript-test-runner",
-  "displayName": "JavaScript Test Runner",
+  "name": "js-test-runner",
+  "displayName": "Js Test Runner",
   "description": "Run JavaScript tests easily using CodeLens",
   "version": "1.0.0",
-  "publisher": "legfrey",
+  "publisher": "js-test-runner",
   "engines": {
     "vscode": "^1.18.0"
   },
@@ -93,6 +93,7 @@
     "@babel/core": "^7.0.0-beta.54",
     "@babel/parser": "^7.0.0-beta.54",
     "@babel/plugin-syntax-jsx": "^7.0.0-beta.54",
-    "@babel/plugin-syntax-typescript": "^7.0.0-beta.54"
+    "@babel/plugin-syntax-typescript": "^7.0.0-beta.54",
+    "vsce": "^1.87.1"
   }
 }

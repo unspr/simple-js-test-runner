@@ -1,9 +1,7 @@
 # JavaScript Test Runner
 [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
 
-
-## ⚠ This extension is currently deprecated 
-(more info : https://github.com/g3offrey/javascript-test-runner/issues/41)
+(more info : https://github.com/ToddRuan0/js-test-runner)
 
 ## Overview
 
