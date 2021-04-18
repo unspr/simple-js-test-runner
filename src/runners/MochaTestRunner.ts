@@ -1,4 +1,6 @@
 import { join } from "path";
+
+import escapeStringRegexp from "escape-string-regexp";
 import { debug, WorkspaceFolder } from "vscode";
 
 import { ITestRunnerInterface } from "../interfaces/ITestRunnerInterface";
@@ -29,9 +31,9 @@ export class MochaTestRunner implements ITestRunnerInterface {
     const environmentVariables = this.configurationProvider
       .environmentVariables;
 
-    const command = `${
-      this.binPath
-    } ${fileName} --grep="^${testName}$" ${additionalArguments}`;
+    const command = `${this.binPath} ${fileName} --grep="^${escapeStringRegexp(
+      testName
+    )}$" ${additionalArguments}`;
 
     const terminal = this.terminalProvider.get(
       { env: environmentVariables },
@@ -55,7 +57,7 @@ export class MochaTestRunner implements ITestRunnerInterface {
       args: [
         fileName,
         "--grep",
-        testName,
+        `^${escapeStringRegexp(testName)}$`,
         "--no-timeout",
         ...additionalArguments.split(" ")
       ],
