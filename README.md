@@ -1,6 +1,7 @@
 # JavaScript Test Runner
 [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors)
 
+Thanks for https://github.com/alexeynobody/test-runner-reloaded
 (more info : https://github.com/ToddRuan0/simple-js-test-runner)
 
 ## Overview

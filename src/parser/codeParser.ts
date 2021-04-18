@@ -4,12 +4,11 @@ import * as _ from "lodash";
 const testTokens = ["describe", "it", "test"];
 
 function codeParser(sourceCode) {
-  const parserOptions = {
+  const ast = parse(sourceCode, {
     plugins: ["jsx", "typescript"],
     sourceType: "module",
-    tokens: true
-  };
-  const ast = parse(sourceCode, parserOptions);
+    tokens: false
+  });
 
   return getStatementsTestObjs(ast.program.body, "");
 }
@@ -23,6 +22,10 @@ function getStatementsTestObjs(stats, prefixTestName) {
       }
 
       const callee = expression.callee;
+      if (!callee) {
+        return;
+      }
+
       if (!_.includes(testTokens, callee.name)) {
         return;
       }
