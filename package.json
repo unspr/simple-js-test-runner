@@ -1,6 +1,6 @@
 {
-  "name": "js-test-runner",
-  "displayName": "Js Test Runner",
+  "name": "simple-js-test-runner",
+  "displayName": "Simple Js Test Runner",
   "description": "Run JavaScript tests easily using CodeLens",
   "version": "1.0.0",
   "publisher": "js-test-runner",
@@ -20,7 +20,7 @@
   "preview": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/g3offrey/javascript-test-runner"
+    "url": "https://github.com/ToddRuan0/js-test-runner"
   },
   "icon": "ressources/icon.png",
   "main": "./out/extension",
@@ -78,7 +78,7 @@
     ]
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.42",
+    "@types/mocha": "^7.0.2",
     "@types/node": "^7.0.43",
     "all-contributors-cli": "^5.3.0",
     "husky": "^0.14.3",
@@ -87,13 +87,17 @@
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.13.0",
     "typescript": "^2.6.1",
-    "vscode": "^1.1.6"
+    "ts-node": "^8.10.2",
+    "mocha": "^7.2.0",
+    "chai": "^4.2.0",
+    "vscode": "^1.1.6",
+    "vsce": "^1.87.1"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.54",
     "@babel/parser": "^7.0.0-beta.54",
     "@babel/plugin-syntax-jsx": "^7.0.0-beta.54",
     "@babel/plugin-syntax-typescript": "^7.0.0-beta.54",
-    "vsce": "^1.87.1"
+    "lodash": "^4.17.15"
   }
 }

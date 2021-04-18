@@ -31,7 +31,7 @@ export class MochaTestRunner implements ITestRunnerInterface {
 
     const command = `${
       this.binPath
-    } ${fileName} --grep="^${testName}" ${additionalArguments}`;
+    } ${fileName} --grep="^${testName}$" ${additionalArguments}`;
 
     const terminal = this.terminalProvider.get(
       { env: environmentVariables },

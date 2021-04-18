@@ -4,35 +4,35 @@
 //
 
 // The module 'assert' provides assertion methods from node
-import * as assert from 'assert'
+import * as assert from "assert";
+import { expect } from "chai";
 
-import { codeParser } from '../../parser/codeParser'
+import { codeParser } from "../../parser/codeParser";
 
 // Defines a Mocha test suite to group tests of similar kind together
-suite('codeParser Tests', () => {
-    // Defines a Mocha unit test
-    test('Valid Token', () => {
-        const code = `
+describe("codeParser Tests", () => {
+  // Defines a Mocha unit test
+  it("Valid Token", () => {
+    const code = `
             describe('Fake test', () => {});
-        `
-        assert.equal(1, codeParser(code).length)
-    })
+        `;
+    assert.equal(1, codeParser(code).length);
+  });
 
-    test('Invalid Tokens', () => {
-        const code = `
+  it("Invalid Tokens", () => {
+    const code = `
             var test = 'Fluo';
             let src = {test: true, type: 'BANK'};
             if (!src.test && src.type === 'BANK') {
                 let firstName = 'test';
             }
-        `
-        assert.equal(0, codeParser(code).length)
-    })
+        `;
+    assert.equal(0, codeParser(code).length);
+  });
 
-    test('Jsx syntax', () => {
-        const code = `
+  it("Jsx syntax", () => {
+    const code = `
         describe("JsonFormTextField", () => {
-
             test("Test render", () => {
                 const config: ITextFieldConfig = {
                     fieldType: "text",
@@ -48,7 +48,18 @@ suite('codeParser Tests', () => {
                 ownerInput.simulate("change");
             });
         });
-        `
-        assert.equal(2, codeParser(code).length)
-    })
-})
+
+        describe("JsonFormTextField2", () => {
+            test("Test render2", () => {
+                return;
+            });
+        });
+        `;
+    const res = codeParser(code);
+    expect(res[0].testName).to.equal("JsonFormTextField");
+    expect(res[1].testName).to.equal("JsonFormTextField Test render");
+    expect(res[2].testName).to.equal("JsonFormTextField2");
+    expect(res[3].testName).to.equal("JsonFormTextField2 Test render2");
+    expect(res.length).to.equal(4);
+  });
+});

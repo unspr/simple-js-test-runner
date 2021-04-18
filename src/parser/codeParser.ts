@@ -1,37 +1,55 @@
 import { parse } from "@babel/parser";
+import * as _ from "lodash";
 
 const testTokens = ["describe", "it", "test"];
 
 function codeParser(sourceCode) {
   const parserOptions = {
-    plugins: [
-      "jsx",
-      "typescript"
-    ],
+    plugins: ["jsx", "typescript"],
     sourceType: "module",
-    tokens: true,
+    tokens: true
   };
   const ast = parse(sourceCode, parserOptions);
 
-  return ast.tokens
-    .map(({ value, loc, type }, index) => {
-      if (testTokens.indexOf(value) === -1) {
-        return;
-      }
-      if (type.label !== "name") {
-        return;
-      }
-      const nextToken = ast.tokens[index + 1];
-      if (!nextToken.type.startsExpr) {
+  return getStatementsTestObjs(ast.program.body, "");
+}
+
+function getStatementsTestObjs(stats, prefixTestName) {
+  return _.chain(stats)
+    .map(stat => {
+      const expression = stat.expression;
+      if (!expression) {
         return;
       }
 
-      return {
-        loc,
-        testName: ast.tokens[index + 2].value
-      };
+      const callee = expression.callee;
+      if (!_.includes(testTokens, callee.name)) {
+        return;
+      }
+
+      const testName = prefixTestName
+        ? `${prefixTestName} ${expression.arguments[0].value}`
+        : expression.arguments[0].value;
+      if (callee.name === "describe") {
+        return [
+          {
+            loc: callee.loc,
+            testName
+          },
+          ...getStatementsTestObjs(expression.arguments[1].body.body, testName)
+        ];
+      } else {
+        return [
+          {
+            loc: callee.loc,
+            testName
+          }
+        ];
+      }
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .flatten()
+    .value();
 }
 
 export { codeParser };
