@@ -2,8 +2,8 @@
   "name": "simple-js-test-runner",
   "displayName": "Simple Js Test Runner",
   "description": "Run JavaScript tests easily using CodeLens",
-  "version": "1.0.0",
-  "publisher": "js-test-runner",
+  "version": "1.0.1",
+  "publisher": "ToddRuan",
   "engines": {
     "vscode": "^1.18.0"
   },
