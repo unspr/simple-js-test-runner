@@ -50,16 +50,16 @@ describe("codeParser Tests", () => {
         });
 
         describe("JsonFormTextField2", () => {
-            test("Test render2", () => {
+            test("| Test render2", () => {
                 return;
             });
         });
         `;
     const res = codeParser(code);
-    expect(res[0].testName).to.equal("JsonFormTextField");
-    expect(res[1].testName).to.equal("JsonFormTextField Test render");
-    expect(res[2].testName).to.equal("JsonFormTextField2");
-    expect(res[3].testName).to.equal("JsonFormTextField2 Test render2");
+    expect(res[0].testName).to.equal("JsonFormTextField ");
+    expect(res[1].testName).to.equal("JsonFormTextField Test render$");
+    expect(res[2].testName).to.equal("JsonFormTextField2 ");
+    expect(res[3].testName).to.equal("JsonFormTextField2 \\| Test render2$");
     expect(res.length).to.equal(4);
   });
 });
