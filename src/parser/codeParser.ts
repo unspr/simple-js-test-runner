@@ -1,8 +1,6 @@
 import { parse } from "@babel/parser";
 import * as _ from "lodash";
 
-import escapeStringRegexp from "escape-string-regexp";
-
 const testTokens = ["describe", "it", "test"];
 
 function codeParser(sourceCode) {
@@ -32,9 +30,9 @@ function getStatementsTestObjs(stats, prefixTestName) {
         return;
       }
 
-      const testName = escapeStringRegexp(
-        `${prefixTestName}${expression.arguments[0].value} `
-      );
+      const testName = `${prefixTestName}${_.escapeRegExp(
+        expression.arguments[0].value
+      )} `;
       if (callee.name === "describe") {
         return [
           {

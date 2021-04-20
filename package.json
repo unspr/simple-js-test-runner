@@ -2,7 +2,7 @@
   "name": "simple-js-test-runner",
   "displayName": "Simple Js Test Runner",
   "description": "Run JavaScript tests easily using CodeLens",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "ToddRuan",
   "engines": {
     "vscode": "^1.18.0"
@@ -98,7 +98,6 @@
     "@babel/parser": "^7.9.4",
     "@babel/plugin-syntax-jsx": "^7.8.3",
     "@babel/plugin-syntax-typescript": "^7.8.3",
-    "lodash": "^4.17.15",
-    "escape-string-regexp": "^4.0.0"
+    "lodash": "^4.17.15"
   }
 }
