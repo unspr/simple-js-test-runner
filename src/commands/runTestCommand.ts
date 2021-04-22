@@ -6,7 +6,7 @@ import { getTestRunner } from "../runners/TestRunnerFactory";
 async function runTest(
   rootPath: WorkspaceFolder,
   fileName: string,
-  testName: string
+  testName: string = ""
 ) {
   const relativeFilename = relative(rootPath.uri.path, fileName);
   const testRunner = await getTestRunner(rootPath);

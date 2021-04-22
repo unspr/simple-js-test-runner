@@ -1,8 +1,8 @@
 {
   "name": "simple-js-test-runner",
   "displayName": "Simple Js Test Runner",
-  "description": "Run JavaScript tests easily using CodeLens",
-  "version": "1.0.3",
+  "description": "Run JavaScript tests simply as WebStorm using CodeLens",
+  "version": "1.0.4",
   "publisher": "ToddRuan",
   "engines": {
     "vscode": "^1.18.0"
@@ -15,7 +15,8 @@
     "mocha",
     "jest",
     "test",
-    "unit"
+    "unit",
+    "webstorm"
   ],
   "preview": true,
   "repository": {

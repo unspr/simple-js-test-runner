@@ -29,9 +29,14 @@ export class MochaTestRunner implements ITestRunnerInterface {
     const environmentVariables = this.configurationProvider
       .environmentVariables;
 
-    const command = `${
-      this.binPath
-    } ${fileName} --grep="^${testName}" ${additionalArguments}`;
+    let command = `${this.binPath} ${fileName}`;
+    if (testName) {
+      command += ` --grep='^${testName}'`;
+    }
+
+    if (additionalArguments) {
+      command += ` ${additionalArguments}`;
+    }
 
     const terminal = this.terminalProvider.get(
       { env: environmentVariables },
@@ -51,7 +56,10 @@ export class MochaTestRunner implements ITestRunnerInterface {
     const environmentVariables = this.configurationProvider
       .environmentVariables;
 
-    const args = [fileName, "--grep", `^${testName}`, "--no-timeout"];
+    const args = [fileName, "--no-timeout"];
+    if (testName) {
+      args.push(...["--grep", `^${testName}`]);
+    }
 
     if (additionalArguments) {
       args.push(...additionalArguments.split(" "));
