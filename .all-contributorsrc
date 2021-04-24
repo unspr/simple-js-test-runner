@@ -9,12 +9,12 @@
   "imageSize": 100,
   "commit": true,
   "contributors": [
-   {
-     "login": "g3offrey",
-     "name": "Geoffrey",
-     "avatar_url": "https://avatars1.githubusercontent.com/u/11151445?v=4",
-     "profile": "https://github.com/g3offrey",
-     "contributions": [
+    {
+      "login": "g3offrey",
+      "name": "Geoffrey",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/11151445?v=4",
+      "profile": "https://github.com/g3offrey",
+      "contributions": [
         "code",
         "ideas"
       ]
@@ -118,6 +118,15 @@
       "name": "小秦",
       "avatar_url": "https://avatars3.githubusercontent.com/u/1265888?v=4",
       "profile": "https://xqin.net/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ToddRuan0",
+      "name": "ToddRuan0",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68210342?v=4",
+      "profile": "https://github.com/ToddRuan0",
       "contributions": [
         "code"
       ]
