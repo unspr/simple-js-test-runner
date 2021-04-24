@@ -128,7 +128,10 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/68210342?v=4",
       "profile": "https://github.com/ToddRuan0",
       "contributions": [
-        "code"
+        "code",
+        "bug",
+        "design",
+        "test"
       ]
     }
   ]
