@@ -67,10 +67,11 @@ export class MochaTestRunner implements ITestRunnerInterface {
 
     debug.startDebugging(rootPath, {
       args,
-      console: "integratedTerminal",
       env: environmentVariables,
+      internalConsoleOptions: "neverOpen",
       name: "Debug Test",
       program: "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      redirectOutput: true,
       request: "launch",
       type: "node",
       windows: {
