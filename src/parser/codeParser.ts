@@ -30,9 +30,8 @@ function getStatementsTestObjs(stats, prefixTestName) {
         return;
       }
 
-      const testName = `${prefixTestName}${_.escapeRegExp(
-        expression.arguments[0].value
-      )} `;
+      const thisTitle = _.escapeRegExp(expression.arguments[0].value);
+      const testName = `${prefixTestName}${thisTitle.replace(/'/g, "\\'")} `;
       if (callee.name === "describe") {
         return [
           {
