@@ -3,7 +3,7 @@ All notable changes to the "javascript-test-runner" extension will be documented
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [1.0.7] - 2021-04-29
+## [1.0.8] - 2021-04-29
 - bug fix
 
 ## [1.0.6] - 2021-04-28

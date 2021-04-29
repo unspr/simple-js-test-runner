@@ -32,8 +32,8 @@ export class MochaTestRunner implements ITestRunnerInterface {
     let command = `${this.binPath} ${fileName}`;
     if (testName) {
       command += ` --grep=$'^${testName
-        .replace(/'/g, "\\'")
-        .replace(/\\/g, "\\\\")}'`;
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'")}'`;
     }
 
     if (additionalArguments) {
