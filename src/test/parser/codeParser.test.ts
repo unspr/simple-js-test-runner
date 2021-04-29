@@ -60,7 +60,7 @@ describe("codeParser Tests", () => {
     expect(res[1].testName).to.equal("JsonFormTextField Test render$");
     expect(res[2].testName).to.equal("Json\\$FormTextField2 ");
     expect(res[3].testName).to.equal(
-      "Json\\$FormTextField2 \\| Test render\\'2$"
+      "Json\\$FormTextField2 \\| Test render'2$"
     );
     expect(res.length).to.equal(4);
   });

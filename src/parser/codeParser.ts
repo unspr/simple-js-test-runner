@@ -31,7 +31,7 @@ function getStatementsTestObjs(stats, prefixTestName) {
       }
 
       const thisTitle = _.escapeRegExp(expression.arguments[0].value);
-      const testName = `${prefixTestName}${thisTitle.replace(/'/g, "\\'")} `;
+      const testName = `${prefixTestName}${thisTitle} `;
       if (callee.name === "describe") {
         return [
           {
