@@ -3,6 +3,9 @@ All notable changes to the "javascript-test-runner" extension will be documented
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.0.9] - 2021-05-05
+- add run/debug whole test file feature
+
 ## [1.0.8] - 2021-04-29
 - bug fix
 

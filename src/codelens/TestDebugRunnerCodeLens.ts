@@ -5,12 +5,13 @@ export default class TestDebugRunnerCodeLens extends CodeLens {
     rootPath: WorkspaceFolder,
     fileName: string,
     testName: string,
-    range: Range
+    range: Range,
+    title: string = "Debug Test"
   ) {
     super(range, {
       arguments: [rootPath, fileName, testName],
       command: "javascript-test-runner.debug.test",
-      title: "Debug Test"
+      title
     });
   }
 }
