@@ -2,10 +2,10 @@
   "name": "simple-js-test-runner",
   "displayName": "Simple Js Test Runner",
   "description": "Run JavaScript tests simply as WebStorm using CodeLens",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "publisher": "ToddRuan",
   "engines": {
-    "vscode": "^1.18.0"
+    "vscode": "^1.47.0"
   },
   "license": "MIT",
   "categories": [
@@ -18,7 +18,6 @@
     "unit",
     "webstorm"
   ],
-  "preview": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/ToddRuan0/js-test-runner"
@@ -63,7 +62,6 @@
     "esbuild-watch": "npm run -S esbuild-base -- --sourcemap --watch",
     "test-compile": "tsc -p ./",
     "watch": "tsc -watch  --noUnusedParameters --noUnusedLocals  -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "npm run compile && node ./node_modules/vscode/bin/test",
     "lint": "tslint -c tslint.json src/**/*.ts",
     "format": "prettier --write src/**/*.{ts,json} package.json",
@@ -93,16 +91,16 @@
     "prettier": "1.13.7",
     "ts-node": "^8.10.2",
     "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.9.7",
     "vsce": "^1.88.0",
-    "vscode": "^1.1.6"
+    "@types/vscode": "^1.47.0"
   },
   "dependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/parser": "^7.9.4",
+    "@babel/core": "^7.14.0",
+    "@babel/parser": "^7.14.1",
     "@babel/plugin-syntax-jsx": "^7.8.3",
     "@babel/plugin-syntax-typescript": "^7.8.3",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.21"
   }
 }

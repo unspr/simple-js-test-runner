@@ -72,8 +72,8 @@ export class MochaTestRunner implements ITestRunnerInterface {
       env: environmentVariables,
       internalConsoleOptions: "neverOpen",
       name: "Debug Test",
+      outputCapture: "std",
       program: "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      redirectOutput: true,
       request: "launch",
       type: "node",
       windows: {
