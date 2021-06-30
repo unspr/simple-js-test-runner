@@ -1,5 +1,5 @@
 import { parse } from "@babel/parser";
-import * as _ from "lodash";
+import { escapeRegExp, includes } from "lodash";
 
 const testTokens = ["describe", "it", "test"];
 
@@ -14,7 +14,7 @@ function codeParser(sourceCode) {
 }
 
 function getStatementsTestObjs(stats, prefixTestName) {
-  return _.chain(stats)
+  return stats
     .map(stat => {
       const expression = stat.expression;
       if (!expression) {
@@ -26,11 +26,11 @@ function getStatementsTestObjs(stats, prefixTestName) {
         return;
       }
 
-      if (!_.includes(testTokens, callee.name)) {
+      if (!includes(testTokens, callee.name)) {
         return;
       }
 
-      const thisTitle = _.escapeRegExp(expression.arguments[0].value);
+      const thisTitle = escapeRegExp(expression.arguments[0].value);
       const testName = `${prefixTestName}${thisTitle} `;
       if (callee.name === "describe") {
         return [
@@ -50,8 +50,7 @@ function getStatementsTestObjs(stats, prefixTestName) {
       }
     })
     .filter(Boolean)
-    .flatten()
-    .value();
+    .flat();
 }
 
 export { codeParser };

@@ -1,6 +1,6 @@
 import { CodeLens, CodeLensProvider, TextDocument, workspace } from "vscode";
 
-import _ from "lodash";
+import { isEmpty } from "lodash";
 import TestRunnerDebugCodeLens from "../codelens/TestDebugRunnerCodeLens";
 import TestRunnerCodeLens from "../codelens/TestRunnerCodeLens";
 import { codeParser } from "../parser/codeParser";
@@ -47,7 +47,7 @@ export default class TestRunnerCodeLensProvider implements CodeLensProvider {
   ): CodeLens[] | Thenable<CodeLens[]> {
     const rootPath = getRootPath(document);
     const testInfos = codeParser(document.getText());
-    const testCodeLens = _.chain(testInfos)
+    const testCodeLens = testInfos
       .map(({ loc, testName }) =>
         getCodeLens(
           rootPath,
@@ -58,11 +58,10 @@ export default class TestRunnerCodeLensProvider implements CodeLensProvider {
           {}
         )
       )
-      .flatten()
-      .value();
+      .flat();
 
     let fileCodeLens = [];
-    if (!_.isEmpty(testInfos)) {
+    if (!isEmpty(testInfos)) {
       fileCodeLens = getCodeLens(
         rootPath,
         document.fileName,

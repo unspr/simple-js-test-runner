@@ -61,7 +61,7 @@ export class JestTestRunner implements ITestRunnerInterface {
         `--testNamePattern`,
         testName,
         "--runInBand",
-        ...additionalArguments.split(" ")
+        ...additionalArguments.split(" ").filter(Boolean)
       ],
       console: "integratedTerminal",
       env: environmentVariables,
