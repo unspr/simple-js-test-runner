@@ -1,15 +1,8 @@
-//
-// Note: This example test is leveraging the Mocha test framework.
-// Please refer to their documentation on https://mochajs.org/ for help.
-//
-
-// The module 'assert' provides assertion methods from node
 import * as assert from "assert";
 import { expect } from "chai";
 
 import { codeParser } from "../../parser/codeParser";
 
-// Defines a Mocha test suite to group tests of similar kind together
 describe("codeParser Tests", () => {
   // Defines a Mocha unit test
   it("Valid Token", () => {
@@ -33,7 +26,7 @@ describe("codeParser Tests", () => {
   it("Jsx syntax", () => {
     const code = `
         describe("JsonFormTextField", () => {
-            test("Test render", () => {
+            test("Test render" + "2", () => {
                 const config: ITextFieldConfig = {
                     fieldType: "text",
                     name: "Owner",
@@ -57,7 +50,7 @@ describe("codeParser Tests", () => {
         `;
     const res = codeParser(code);
     expect(res[0].testName).to.equal("JsonFormTextField ");
-    expect(res[1].testName).to.equal("JsonFormTextField Test render$");
+    expect(res[1].testName).to.equal("JsonFormTextField Test render2$");
     expect(res[2].testName).to.equal("Json\\$FormTextField2 ");
     expect(res[3].testName).to.equal(
       "Json\\$FormTextField2 \\| Test render'2$"

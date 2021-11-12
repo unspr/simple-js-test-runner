@@ -2,7 +2,7 @@
   "name": "simple-js-test-runner",
   "displayName": "Simple Js Test Runner",
   "description": "Run JavaScript tests simply as WebStorm using CodeLens",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "publisher": "ToddRuan",
   "engines": {
     "vscode": "^1.47.0"
@@ -25,7 +25,7 @@
   "icon": "ressources/icon.png",
   "main": "./out/main",
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "contributes": {
     "commands": [
@@ -82,25 +82,22 @@
   "devDependencies": {
     "@types/mocha": "^7.0.2",
     "@types/node": "13.13.15",
-    "all-contributors-cli": "^5.3.0",
-    "chai": "^4.2.0",
-    "esbuild": "^0.11.13",
+    "@types/vscode": "^1.47.0",
+    "all-contributors-cli": "^5.11.0",
+    "chai": "^4.3.4",
+    "esbuild": "^0.11.23",
     "husky": "^0.14.3",
-    "lint-staged": "^7.2.0",
+    "lint-staged": "^7.3.0",
     "mocha": "^7.2.0",
-    "prettier": "1.13.7",
+    "prettier": "^2.4.1",
     "ts-node": "^8.10.2",
-    "tslint": "^5.10.0",
+    "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.9.7",
-    "vsce": "^1.88.0",
-    "@types/vscode": "^1.47.0"
+    "typescript": "^3.9.10",
+    "vsce": "^1.103.1"
   },
   "dependencies": {
-    "@babel/core": "^7.14.0",
-    "@babel/parser": "^7.14.1",
-    "@babel/plugin-syntax-jsx": "^7.8.3",
-    "@babel/plugin-syntax-typescript": "^7.8.3",
+    "@babel/parser": "^7.16.3",
     "lodash": "^4.17.21"
   }
 }

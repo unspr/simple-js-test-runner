@@ -2,3 +2,4 @@ out
 node_modules
 .vscode-test/
 .vsix
+simple-js-test-runner-*

@@ -8,8 +8,8 @@ src/**
 .gitignore
 .mocharc.yaml
 .vscodeignore
+pnpm-lock.yaml
 simple-js-test-runner-*
 tsconfig.json
 tslint.json
-yarn.lock
 vsc-extension-quickstart.md

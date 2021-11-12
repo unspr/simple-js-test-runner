@@ -26,8 +26,8 @@ export class MochaTestRunner implements ITestRunnerInterface {
     testName: string
   ) {
     const additionalArguments = this.configurationProvider.additionalArguments;
-    const environmentVariables = this.configurationProvider
-      .environmentVariables;
+    const environmentVariables =
+      this.configurationProvider.environmentVariables;
 
     let command = `${this.binPath} ${fileName}`;
     if (testName) {
@@ -55,10 +55,10 @@ export class MochaTestRunner implements ITestRunnerInterface {
     testName: string
   ) {
     const additionalArguments = this.configurationProvider.additionalArguments;
-    const environmentVariables = this.configurationProvider
-      .environmentVariables;
+    const environmentVariables =
+      this.configurationProvider.environmentVariables;
 
-    const args = [fileName, "--no-timeout"];
+    const args = [fileName, "--no-timeouts"];
     if (testName) {
       args.push(...["--grep", `^${testName}`]);
     }
@@ -77,8 +77,8 @@ export class MochaTestRunner implements ITestRunnerInterface {
       request: "launch",
       type: "node",
       windows: {
-        program: "${workspaceFolder}/node_modules/mocha/bin/_mocha"
-      }
+        program: "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      },
     });
   }
 }

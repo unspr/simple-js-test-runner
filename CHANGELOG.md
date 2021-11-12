@@ -3,6 +3,9 @@ All notable changes to the "javascript-test-runner" extension will be documented
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.0.12] - 2021-11-12
+- allow concat test name via '+' operation
+
 ## [1.0.11] - 2021-06-30
 - fix bug about debug feature for Jest
 
