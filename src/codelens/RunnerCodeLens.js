@@ -1,4 +1,4 @@
-import {CodeLens} from "vscode";
+import { CodeLens } from 'vscode';
 
 export default class RunnerCodeLens {
   static get(range, title, mode) {
@@ -9,20 +9,19 @@ export default class RunnerCodeLens {
   }
 
   static resolve(codeLens, rootPath, fileName, testName) {
-      let command;
-      if (codeLens.mode === 'test') {
-          command = 'javascript-test-runner.run.test';
-      } else if (codeLens.mode === 'debug') {
-          command = 'javascript-test-runner.debug.test';
-      }
+    let command;
+    if (codeLens.mode === 'test') {
+      command = 'javascript-test-runner.run.test';
+    } else if (codeLens.mode === 'debug') {
+      command = 'javascript-test-runner.debug.test';
+    }
 
-      const title = codeLens.codeLensTitle
-          || ((codeLens.mode === 'test') ? 'Run Test' : 'Debug Test');
+    const title = codeLens.codeLensTitle || (codeLens.mode === 'test' ? 'Run Test' : 'Debug Test');
 
-      codeLens.command = {
-          title,
-          command,
-          arguments: [rootPath, fileName, testName],
-      };
+    codeLens.command = {
+      title,
+      command,
+      arguments: [rootPath, fileName, testName],
+    };
   }
 }

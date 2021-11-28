@@ -1,16 +1,15 @@
 {
-    "compilerOptions": {
-        "allowJs": true,
-        "alwaysStrict": true,
-        //        "checkJs": false,
-        "module": "commonjs",
-        "esModuleInterop": true,
-        "removeComments": true,
-        "target": "ES2019",
-        "lib": ["ES2019"],
-        "outDir": "out",
-        "sourceMap": true,
-        "rootDir": "src"
-    },
-    "exclude": ["node_modules", ".vscode-test"]
+  "compilerOptions": {
+    "allowJs": true,
+    "alwaysStrict": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "removeComments": true,
+    "target": "ES2019",
+    "lib": ["ES2019"],
+    "outDir": "out",
+    "sourceMap": true,
+    "rootDir": "src"
+  },
+  "exclude": ["node_modules", ".vscode-test"]
 }

@@ -1,11 +1,11 @@
-import * as assert from "assert";
-import { expect } from "chai";
-import _ from "lodash";
-import AST from "../../parser/ast";
-import Parser from "../../parser/parser";
+import * as assert from 'assert';
+import { expect } from 'chai';
+import _ from 'lodash';
+import AST from '../../parser/ast';
+import Parser from '../../parser/parser';
 
-describe("codeParser Tests", () => {
-  it("Valid Token", async () => {
+describe('codeParser Tests', () => {
+  it('Valid Token', async () => {
     const code = `
             describe('Fake test', () => {});
         `;
@@ -15,7 +15,7 @@ describe("codeParser Tests", () => {
     assert.equal(1, locations.length);
   });
 
-  it("Invalid Tokens", async () => {
+  it('Invalid Tokens', async () => {
     const code = `
             var test = 'Fluo';
             let src = {test: true, type: 'BANK'};
@@ -29,7 +29,7 @@ describe("codeParser Tests", () => {
     assert.equal(0, locations.length);
   });
 
-  it("Jsx syntax", async () => {
+  it('Jsx syntax', async () => {
     const code = `
         describe("JsonFormTextField", () => {
             test("Test render" + "2", () => {
@@ -58,12 +58,10 @@ describe("codeParser Tests", () => {
     const line2TestName = {};
     await AST.nanoPass(ast, Parser.getTestNameParser(line2TestName));
 
-    expect(line2TestName[2]).to.equal("JsonFormTextField ");
-    expect(line2TestName[3]).to.equal("JsonFormTextField Test render2$");
-    expect(line2TestName[19]).to.equal("Json\\$FormTextField2 ");
-    expect(line2TestName[20]).to.equal(
-      "Json\\$FormTextField2 \\| Test render'2$"
-    );
+    expect(line2TestName[2]).to.equal('JsonFormTextField ');
+    expect(line2TestName[3]).to.equal('JsonFormTextField Test render2$');
+    expect(line2TestName[19]).to.equal('Json\\$FormTextField2 ');
+    expect(line2TestName[20]).to.equal('Json\\$FormTextField2 \\| Test render\'2$');
     expect(_.size(line2TestName)).to.equal(4);
   });
 });
