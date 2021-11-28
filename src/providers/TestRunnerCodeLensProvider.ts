@@ -1,9 +1,7 @@
-import { CodeLens, CodeLensProvider, TextDocument, workspace } from "vscode";
-
-import { isEmpty } from "lodash";
-import TestRunnerDebugCodeLens from "../codelens/TestDebugRunnerCodeLens";
-import TestRunnerCodeLens from "../codelens/TestRunnerCodeLens";
-import { codeParser } from "../parser/codeParser";
+import { CodeLens, CodeLensProvider, workspace } from "vscode";
+import RunnerCodeLens from "../codelens/RunnerCodeLens";
+import AST from "../parser/ast";
+import Parser from "../parser/parser";
 
 function getRootPath({ uri }) {
   const activeWorkspace = workspace.getWorkspaceFolder(uri);
@@ -15,67 +13,61 @@ function getRootPath({ uri }) {
   return workspace;
 }
 
-function getCodeLens(
-  rootPath,
-  fileName,
-  testName,
-  startPosition,
-  { testTitle, debugTitle }
-) {
-  const testRunnerCodeLens = new TestRunnerCodeLens(
-    rootPath,
-    fileName,
-    testName,
-    startPosition,
-    testTitle
-  );
-
-  const debugRunnerCodeLens = new TestRunnerDebugCodeLens(
-    rootPath,
-    fileName,
-    testName,
-    startPosition,
-    debugTitle
-  );
-
-  return [testRunnerCodeLens, debugRunnerCodeLens];
-}
-
 export default class TestRunnerCodeLensProvider implements CodeLensProvider {
-  public provideCodeLenses(
-    document: TextDocument
-  ): CodeLens[] | Thenable<CodeLens[]> {
-    const rootPath = getRootPath(document);
-    const testInfos = codeParser(document.getText());
-    const testCodeLens = testInfos
-      .map(({ loc, testName }) =>
-        getCodeLens(
-          rootPath,
-          document.fileName,
-          testName,
-          createRangeObject(document, loc.start),
-          // @ts-ignore
-          {}
-        )
-      )
-      .flat();
+  private codeLenses;
+  private document;
+  private ast;
+  private line2TestName;
 
-    let fileCodeLens = [];
-    if (!isEmpty(testInfos)) {
-      fileCodeLens = getCodeLens(
-        rootPath,
-        document.fileName,
-        undefined,
-        createRangeObject(document, { line: 1 }),
-        { testTitle: "Run All Test", debugTitle: "Debug All Test" }
-      );
-    }
+  public provideCodeLenses(document): CodeLens[] | Thenable<CodeLens[]> {
+    return new Promise(async (resolve) => {
+      this.document = document;
+      this.ast = await AST.parse(document.getText());
 
-    return [...fileCodeLens, ...testCodeLens];
+      const codeLensLocations = [];
+      await AST.nanoPass(this.ast, Parser.getLocationParser(codeLensLocations));
+
+      if (codeLensLocations.length === 0) {
+        resolve([]);
+      }
+
+      this.codeLenses = [];
+      this.addCodeLens(createRangeObject(document, { line: 1 }), {
+        debugTitle: "Debug All Test",
+        testTitle: "Run All Test",
+      });
+
+      for (const { loc } of codeLensLocations) {
+        this.addCodeLens(createRangeObject(document, loc.start));
+      }
+
+      const line2TestName = {};
+      this.line2TestName = line2TestName;
+      AST.nanoPass(this.ast, Parser.getTestNameParser(line2TestName));
+
+      resolve(this.codeLenses);
+    });
   }
 
-  public resolveCodeLens?(): CodeLens | Thenable<CodeLens> {
-    return;
+  public resolveCodeLens(codeLens): CodeLens | Thenable<CodeLens> {
+    const rootPath = getRootPath(this.document);
+    const lineNum = codeLens.range.start.line + 1;
+    const testName = this.line2TestName[lineNum];
+    RunnerCodeLens.resolve(
+      codeLens,
+      rootPath,
+      this.document.fileName,
+      testName
+    );
+    return codeLens;
+  }
+
+  private addCodeLens(startPosition, titleObj?) {
+    const { testTitle, debugTitle } = titleObj || {};
+    this.codeLenses.push(
+      RunnerCodeLens.get(startPosition, testTitle, "test"),
+      RunnerCodeLens.get(startPosition, debugTitle, "debug")
+    );
   }
 }
 

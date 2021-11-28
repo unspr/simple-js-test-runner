@@ -1,18 +1,21 @@
 import * as assert from "assert";
 import { expect } from "chai";
-
-import { codeParser } from "../../parser/codeParser";
+import _ from "lodash";
+import AST from "../../parser/ast";
+import Parser from "../../parser/parser";
 
 describe("codeParser Tests", () => {
-  // Defines a Mocha unit test
-  it("Valid Token", () => {
+  it("Valid Token", async () => {
     const code = `
             describe('Fake test', () => {});
         `;
-    assert.equal(1, codeParser(code).length);
+    const ast = await AST.parse(code);
+    const locations = [];
+    await AST.nanoPass(ast, Parser.getLocationParser(locations));
+    assert.equal(1, locations.length);
   });
 
-  it("Invalid Tokens", () => {
+  it("Invalid Tokens", async () => {
     const code = `
             var test = 'Fluo';
             let src = {test: true, type: 'BANK'};
@@ -20,10 +23,13 @@ describe("codeParser Tests", () => {
                 let firstName = 'test';
             }
         `;
-    assert.equal(0, codeParser(code).length);
+    const ast = await AST.parse(code);
+    const locations = [];
+    await AST.nanoPass(ast, Parser.getLocationParser(locations));
+    assert.equal(0, locations.length);
   });
 
-  it("Jsx syntax", () => {
+  it("Jsx syntax", async () => {
     const code = `
         describe("JsonFormTextField", () => {
             test("Test render" + "2", () => {
@@ -48,13 +54,16 @@ describe("codeParser Tests", () => {
             });
         });
         `;
-    const res = codeParser(code);
-    expect(res[0].testName).to.equal("JsonFormTextField ");
-    expect(res[1].testName).to.equal("JsonFormTextField Test render2$");
-    expect(res[2].testName).to.equal("Json\\$FormTextField2 ");
-    expect(res[3].testName).to.equal(
+    const ast = await AST.parse(code);
+    const line2TestName = {};
+    await AST.nanoPass(ast, Parser.getTestNameParser(line2TestName));
+
+    expect(line2TestName[2]).to.equal("JsonFormTextField ");
+    expect(line2TestName[3]).to.equal("JsonFormTextField Test render2$");
+    expect(line2TestName[19]).to.equal("Json\\$FormTextField2 ");
+    expect(line2TestName[20]).to.equal(
       "Json\\$FormTextField2 \\| Test render'2$"
     );
-    expect(res.length).to.equal(4);
+    expect(_.size(line2TestName)).to.equal(4);
   });
 });

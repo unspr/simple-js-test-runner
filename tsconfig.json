@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+        "allowJs": true,
+        "alwaysStrict": true,
+        //        "checkJs": false,
         "module": "commonjs",
         "esModuleInterop": true,
         "removeComments": true,
