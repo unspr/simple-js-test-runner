@@ -3,6 +3,9 @@ All notable changes to the "javascript-test-runner" extension will be documented
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.0] - 2021-11-28
+- speed up a little
+
 ## [1.0.12] - 2021-11-12
 - allow concat test name via '+' operation
 
