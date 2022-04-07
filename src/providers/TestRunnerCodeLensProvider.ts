@@ -41,9 +41,8 @@ export default class TestRunnerCodeLensProvider implements CodeLensProvider {
         this.addCodeLens(createRangeObject(document, loc.start));
       }
 
-      const line2TestName = {};
-      this.line2TestName = line2TestName;
-      AST.nanoPass(this.ast, Parser.getTestNameParser(line2TestName));
+      this.line2TestName = {};
+      AST.nanoPass(this.ast, Parser.getTestNameParser(this.line2TestName));
 
       return this.codeLenses;
     })();

@@ -11,11 +11,9 @@ export default class Parser {
           return;
         }
 
+        codeLensLocations.push({ loc: callee.loc });
         if (callee.name === 'describe') {
-          codeLensLocations.push({ loc: callee.loc });
           f(expression.arguments[1].body.body);
-        } else {
-          codeLensLocations.push({ loc: callee.loc });
         }
       });
     };
@@ -30,10 +28,8 @@ export default class Parser {
           return;
         }
 
-        let name = expression.arguments[0].value;
-        if (!name) {
-          name = getNameContainsPlusOp(expression.arguments[0]);
-        }
+        const name = expression.arguments[0].value
+         || getNameContainsPlusOp(expression.arguments[0]);
 
         const thisTitle = _.escapeRegExp(name);
         const testName = `${prefix}${thisTitle} `;

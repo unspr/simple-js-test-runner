@@ -2,7 +2,7 @@
   "name": "simple-js-test-runner",
   "displayName": "Simple Js Test Runner",
   "description": "Run JavaScript tests simply as WebStorm using CodeLens",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "publisher": "ToddRuan",
   "engines": {
     "vscode": "^1.47.0"

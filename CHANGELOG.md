@@ -3,6 +3,9 @@ All notable changes to the "javascript-test-runner" extension will be documented
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.2] - 2022-04-07
+- improve code and fail to support win7
+
 ## [1.1.0] - 2021-11-28
 - speed up a little
 

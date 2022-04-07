@@ -1,6 +1,6 @@
-import { exists } from 'fs';
+import { existsSync } from 'fs';
 import { join } from 'path';
-import { WorkspaceFolder } from 'vscode';
+import { WorkspaceFolder, window, workspace } from 'vscode';
 
 import { ITestRunnerInterface } from '../interfaces/ITestRunnerInterface';
 import { ConfigurationProvider } from '../providers/ConfigurationProvider';
@@ -10,40 +10,32 @@ import { MochaTestRunner } from './MochaTestRunner';
 
 const terminalProvider = new TerminalProvider();
 
-function doesFileExist(filePath: string): Promise<boolean> {
-  return new Promise((resolve) => {
-    exists(filePath, (doesExist) => {
-      resolve(doesExist);
-    });
-  });
-}
-
-async function getAvailableTestRunner(
-  testRunners: ITestRunnerInterface[],
-  rootPath: WorkspaceFolder
-): Promise<ITestRunnerInterface> {
+let testRunnerLog;
+function getAvailableTestRunner(testRunners: ITestRunnerInterface[]): ITestRunnerInterface {
   for (const runner of testRunners) {
-    const doesRunnerExist = await doesFileExist(join(rootPath.uri.path, runner.binPath));
+    const doesRunnerExist = existsSync(join(workspace.rootPath, runner.binPath));
 
     if (doesRunnerExist) {
       return runner;
     }
   }
 
+  if (!testRunnerLog) {
+    testRunnerLog = window.createOutputChannel('Test Runner');
+  }
+
+  testRunnerLog.appendLine(`Project root path ${workspace.rootPath}`);
   throw new Error('No test runner in your project. Please install one.');
 }
 
-export async function getTestRunner(rootPath: WorkspaceFolder): Promise<ITestRunnerInterface> {
-  const configurationProvider = new ConfigurationProvider(rootPath);
-
-  const jestTestRunner = new JestTestRunner({
-    configurationProvider,
+export function getTestRunner(rootPath: WorkspaceFolder): ITestRunnerInterface {
+  const provideObj = {
+    configurationProvider: new ConfigurationProvider(rootPath),
     terminalProvider,
-  });
-  const mochaTestRunner = new MochaTestRunner({
-    configurationProvider,
-    terminalProvider,
-  });
+  };
 
-  return getAvailableTestRunner([jestTestRunner, mochaTestRunner], rootPath);
+  const jestTestRunner = new JestTestRunner(provideObj);
+  const mochaTestRunner = new MochaTestRunner(provideObj);
+
+  return getAvailableTestRunner([jestTestRunner, mochaTestRunner]);
 }

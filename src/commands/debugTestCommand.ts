@@ -5,7 +5,7 @@ import { getTestRunner } from '../runners/TestRunnerFactory';
 
 async function debugTest(rootPath: WorkspaceFolder, fileName: string, testName: string) {
   const relativeFilename = relative(rootPath.uri.path, fileName);
-  const testRunner = await getTestRunner(rootPath);
+  const testRunner = getTestRunner(rootPath);
 
   testRunner.debugTest(rootPath, relativeFilename, testName);
 }
