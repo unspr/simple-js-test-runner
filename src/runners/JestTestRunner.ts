@@ -28,7 +28,7 @@ export class JestTestRunner implements ITestRunnerInterface {
 
     const command = `${this.binPath} ${cleanedFileName} --testNamePattern="${testName}" ${additionalArguments}`;
 
-    const terminal = this.terminalProvider.get({ env: environmentVariables } as unknown);
+    const terminal = this.terminalProvider.get({ env: environmentVariables } as unknown, rootPath);
 
     terminal.sendText(command, true);
     terminal.show(true);

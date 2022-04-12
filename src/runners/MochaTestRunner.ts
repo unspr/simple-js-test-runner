@@ -34,7 +34,7 @@ export class MochaTestRunner implements ITestRunnerInterface {
       command += ` ${additionalArguments}`;
     }
 
-    const terminal = this.terminalProvider.get({ env: environmentVariables } as unknown);
+    const terminal = this.terminalProvider.get({ env: environmentVariables } as unknown, rootPath);
 
     terminal.sendText(command, true);
     terminal.show(true);
