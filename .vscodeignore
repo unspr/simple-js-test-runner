@@ -14,3 +14,5 @@ src/**
 pnpm-lock.yaml
 simple-js-test-runner-*
 tsconfig.json
+resources/demo.gif
+resources/aliQRcode.png
