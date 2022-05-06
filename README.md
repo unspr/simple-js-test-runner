@@ -11,7 +11,7 @@ Currently it works **out of the box** for **Mocha** and **Jest** test runner.
 
 ## Demo
 
-![demo](./ressources//demo.gif)
+![demo](resources/demo.gif)
 
 ## Available configuration
 
@@ -30,12 +30,15 @@ This extension works currently with :
 
 ## Need help?
 
-Visit the [Troubleshooting Guide](https://github.com/g3offrey/javascript-test-runner/wiki/Troubleshooting).
+Submit a issue [Here](https://github.com/unspr/simple-js-test-runner/issues/new).
 
 ## Contribute
 
 Please feel free to fork, improve, make pull requests or fill issues.
 I'll be glad to fix bugs you encountered or improve the extension.
+
+## Drink Me Coffee
+![coffee](resources/aliQRcode.png)
 
 ## Contributors
 
