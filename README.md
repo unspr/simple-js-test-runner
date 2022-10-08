@@ -37,7 +37,9 @@ Submit a issue [Here](https://github.com/unspr/simple-js-test-runner/issues/new)
 Please feel free to fork, improve, make pull requests or fill issues.
 I'll be glad to fix bugs you encountered or improve the extension.
 
-## Drink Me Coffee
+## Buy Me a Coffee
+<a href="https://www.buymeacoffee.com/unspr" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
 ![coffee](resources/aliQRcode.png)
 
 ## Contributors

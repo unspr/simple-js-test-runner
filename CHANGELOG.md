@@ -3,6 +3,10 @@ All notable changes to the "javascript-test-runner" extension will be documented
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.6] - 2022-10-08
+- remove default NODE_ENV envVars
+- minify extension package
+
 ## [1.1.3] - 2022-04-12
 - fix multi-root workspace
 

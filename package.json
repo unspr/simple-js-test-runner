@@ -2,7 +2,7 @@
   "name": "simple-js-test-runner",
   "displayName": "Simple Js Test Runner",
   "description": "Run JavaScript tests simply as WebStorm using CodeLens",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "publisher": "ToddRuan",
   "engines": {
     "vscode": "^1.47.0"
@@ -45,9 +45,7 @@
           },
           "javascript-test-runner.envVars": {
             "type": "object",
-            "default": {
-              "NODE_ENV": "test"
-            },
+            "default": {},
             "description": "Environment variables to set before running a test.",
             "scope": "resource"
           }
@@ -56,6 +54,7 @@
     ]
   },
   "scripts": {
+    "package": "vsce package --no-dependencies",
     "vscode:prepublish": "npm run -S esbuild-base -- --minify",
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run -S esbuild-base -- --sourcemap",

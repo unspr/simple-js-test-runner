@@ -1,18 +1,7 @@
-.vscode/**
-.idea/**
-node_modules
-out/test/**
-out/**/*.map
-src/**
-.editorconfig
-.eslintignore
-.eslintrc.json
-.gitignore
-.mocharc.yaml
-.prettierrc
-.vscodeignore
-pnpm-lock.yaml
-simple-js-test-runner-*
-tsconfig.json
-resources/demo.gif
-resources/aliQRcode.png
+# Ignore everything by default. #1899
+*
+*/**
+
+!out/main.js
+!LICENSE
+!resources/icon.png
