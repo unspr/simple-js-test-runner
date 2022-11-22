@@ -8,7 +8,9 @@ export class ConfigurationProvider {
   }
 
   get environmentVariables() {
-    return this.configuration.get('envVars');
+    const envVars = this.configuration.get('envVars');
+    envVars['NODE_ENV'] = 'test';
+    return envVars;
   }
 
   get additionalArguments(): string {
