@@ -11,5 +11,8 @@
     "sourceMap": true,
     "rootDir": "src"
   },
-  "exclude": ["node_modules", ".vscode-test"]
+  "exclude": ["node_modules", ".vscode-test", "out", "test_data"],
+  "ts-node": {
+    "swc": true
+  }
 }

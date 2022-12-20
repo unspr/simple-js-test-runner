@@ -28,8 +28,7 @@ export default class Parser {
           return;
         }
 
-        const name = expression.arguments[0].value
-         || getNameContainsPlusOp(expression.arguments[0]);
+        const name = expression.arguments[0].value || getNameContainsPlusOp(expression.arguments[0]);
 
         const thisTitle = _.escapeRegExp(name);
         const testName = `${prefix}${thisTitle} `;
