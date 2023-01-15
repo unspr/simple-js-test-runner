@@ -1,5 +1,8 @@
+/* eslint-env node, mocha */
+import expect from 'chai';
+
 describe('JsonFormTextField', () => {
-  test('Test render' + '2', () => {
+  test('Test ' + 'render' + '2', () => {
     const config: ITextFieldConfig = {
       fieldType: 'text',
       name: 'Owner',
@@ -17,6 +20,10 @@ describe('JsonFormTextField', () => {
 
 describe('Json$FormTextField2', () => {
   test("| Test render'2", () => {
+    return;
+  });
+
+  test("3", () => {
     return;
   });
 });

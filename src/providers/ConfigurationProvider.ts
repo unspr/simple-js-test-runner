@@ -3,8 +3,8 @@ import { workspace, WorkspaceConfiguration, WorkspaceFolder } from 'vscode';
 export class ConfigurationProvider {
   public configuration: WorkspaceConfiguration = null;
 
-  constructor(rootPath: WorkspaceFolder) {
-    this.configuration = workspace.getConfiguration('javascript-test-runner', rootPath.uri);
+  constructor(rootPath?: WorkspaceFolder) {
+    this.configuration = workspace.getConfiguration('javascript-test-runner', rootPath?.uri);
   }
 
   get environmentVariables() {
@@ -13,5 +13,9 @@ export class ConfigurationProvider {
 
   get additionalArguments(): string {
     return this.configuration.get('additionalArgs');
+  }
+
+  get parserEngine(): string {
+    return this.configuration.get('parserEngine');
   }
 }

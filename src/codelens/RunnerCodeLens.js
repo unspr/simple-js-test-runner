@@ -9,18 +9,13 @@ export default class RunnerCodeLens {
   }
 
   static resolve(codeLens, rootPath, fileName, testName) {
-    let command;
-    if (codeLens.mode === 'test') {
-      command = 'javascript-test-runner.run.test';
-    } else if (codeLens.mode === 'debug') {
-      command = 'javascript-test-runner.debug.test';
-    }
-
-    const title = codeLens.codeLensTitle || (codeLens.mode === 'test' ? 'Run Test' : 'Debug Test');
-
     codeLens.command = {
-      title,
-      command,
+      title: codeLens.codeLensTitle
+        || (codeLens.mode === 'test' ? 'Run Test' : 'Debug Test'),
+
+      command: codeLens.mode === 'test' ? 'javascript-test-runner.run.test'
+        : codeLens.mode === 'debug' ? 'javascript-test-runner.debug.test'
+          : null,
       arguments: [rootPath, fileName, testName],
     };
   }

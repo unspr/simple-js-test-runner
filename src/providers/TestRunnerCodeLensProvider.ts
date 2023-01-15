@@ -1,70 +1,50 @@
 import { CodeLens, CodeLensProvider, workspace } from 'vscode';
 import RunnerCodeLens from '../codelens/RunnerCodeLens';
-import AST from '../parser/ast';
-import Parser from '../parser/parser';
-
-function getRootPath({ uri }) {
-  const activeWorkspace = workspace.getWorkspaceFolder(uri);
-
-  if (activeWorkspace) {
-    return activeWorkspace;
-  }
-
-  return workspace;
-}
+import { Parser } from '../parser/parser';
 
 export default class TestRunnerCodeLensProvider implements CodeLensProvider {
   private codeLenses;
   private document;
-  private ast;
   private line2TestName;
 
   public provideCodeLenses(document): CodeLens[] | Thenable<CodeLens[]> {
     return (async () => {
       this.document = document;
-      this.ast = await AST.parse(document.getText());
+      const parser = new Parser();
+      await parser.parseAST(document.getText());
 
-      const codeLensLocations = [];
-      await AST.nanoPass(this.ast, Parser.getLocationParser(codeLensLocations));
-
-      if (codeLensLocations.length === 0) {
+      const testLines = await parser.parseTestLine();
+      if (testLines.length === 0) {
         return [];
       }
 
       this.codeLenses = [];
-      this.addCodeLens(createRangeObject(document, { line: 1 }), {
-        debugTitle: 'Debug All Test',
-        testTitle: 'Run All Test',
-      });
-
-      for (const { loc } of codeLensLocations) {
-        this.addCodeLens(createRangeObject(document, loc.start));
+      this.addCodeLens(1, 'test', 'Run All Test');
+      this.addCodeLens(1, 'debug', 'Debug All Test');
+      for (const line of testLines) {
+        this.addCodeLens(line, 'test');
+        this.addCodeLens(line, 'debug');
       }
 
-      this.line2TestName = {};
-      AST.nanoPass(this.ast, Parser.getTestNameParser(this.line2TestName));
+      this.line2TestName = parser.parseTestLine2TestName();
 
       return this.codeLenses;
     })();
   }
 
   public resolveCodeLens(codeLens): CodeLens | Thenable<CodeLens> {
-    const rootPath = getRootPath(this.document);
+    const rootPath = workspace.getWorkspaceFolder(this.document.uri) || workspace;
     const lineNum = codeLens.range.start.line + 1;
-    const testName = this.line2TestName[lineNum];
-    RunnerCodeLens.resolve(codeLens, rootPath, this.document.fileName, testName);
-    return codeLens;
+    return (async () => {
+      this.line2TestName = await this.line2TestName;
+      const testName = this.line2TestName[lineNum];
+      RunnerCodeLens.resolve(codeLens, rootPath, this.document.fileName, testName);
+      return codeLens;
+    })();
   }
 
-  private addCodeLens(startPosition, titleObj?) {
-    const { testTitle, debugTitle } = titleObj || {};
-    this.codeLenses.push(
-      RunnerCodeLens.get(startPosition, testTitle, 'test'),
-      RunnerCodeLens.get(startPosition, debugTitle, 'debug')
-    );
+  private addCodeLens(lineNumber: number, mode: 'test'|'debug', title?: string) {
+    const position = this.document.lineAt(lineNumber - 1).range;
+    this.codeLenses.push(RunnerCodeLens.get(position, title, mode));
   }
-}
-
-function createRangeObject(document, { line }) {
-  return document.lineAt(line - 1).range;
 }
